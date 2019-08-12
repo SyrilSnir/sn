@@ -1,5 +1,26 @@
 {
+    "name":"syrilsnir/expertcrm",
+    "version":"0.0.0",
+    "description": "Эксперементальная версия CRM",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Konstantin Kotov",
+            "email": "kotov@nsod.ru",
+            "homepage": "https://github.com/SyrilSnir"
+        }
+    ],
     "require": {
-        "yiisoft/yii2": "^2.0"
+        "yiisoft/yii2": "^2.0",
+        "yiisoft/yii2-bootstrap": "^2.0",
+        "dmstr/yii2-adminlte-asset": "^2.6"
+    },
+    "require-dev": {
+        "yiisoft/yii2-debug": "^2.1"   
+    },
+    "autoload":{
+        "psr-4": {
+            "app\\": "app"
+        }
     }
 }

@@ -32,3 +32,13 @@ tests/_support/_generated
 #vagrant folder
 /.vagrant
 composer.lock
+
+#Yii cache
+/runtime
+/web/assets
+
+#Db Production
+/config/db.php
+
+yii
+/web/index.php
