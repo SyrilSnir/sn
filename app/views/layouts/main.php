@@ -1,14 +1,20 @@
 <?php 
 use yii\bootstrap\NavBar;
 use yii\bootstrap\Nav;
-use app\helpers\NavMenuHelper;
+use app\core\helpers\Menu\NavMenuHelper;
+use yii\helpers\Html;
+/* @var $this \yii\web\View */
+/* @var $content string */
 
-$menu = NavMenuHelper::getMenu();
 ?>
 <?php $this->beginPage(); ?>
-<html>
+<!DOCTYPE html>
+<html lang="<?= Yii::$app->language ?>">
     <head>
-        <title>Экспертная CRM</title>
+        <meta charset="<?= Yii::$app->charset ?>"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <?= Html::csrfMetaTags() ?>
+        <title><?= Html::encode($this->title) ?></title>
 <?php $this->head(); ?>
     </head>
     <body>
@@ -24,7 +30,7 @@ $menu = NavMenuHelper::getMenu();
 
     echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
-            'items' => $menu 
+            'items' => NavMenuHelper::getMenu() 
                 ]);
         NavBar::end();
 ?>        

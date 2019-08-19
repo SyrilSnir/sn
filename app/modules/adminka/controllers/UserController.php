@@ -3,11 +3,10 @@
 namespace app\modules\adminka\controllers;
 
 use app\modules\adminka\models\users\UserSearch;
-use app\core\repositories\UserRepository;
-use app\models\ActiveRecord\User;
+use app\core\repositories\User\UserRepository;
 use app\models\Forms\Manage\User\EditForm;
 use app\models\Forms\Manage\User\CreateForm;
-use app\core\services\operation\UserService;
+use app\core\services\operation\User\UserService;
 use Yii;
 
 
@@ -16,7 +15,7 @@ use Yii;
  *
  * @author kotov
  */
-class UsersController extends BaseAdminController
+class UserController extends BaseAdminController
 {
     /**
      *
@@ -24,17 +23,25 @@ class UsersController extends BaseAdminController
      */
     protected $service;
     
+    /**
+     *
+     * @var UserRepository
+     */
+    protected $repository;
+    
     public function __construct(
             $id, 
             $module, 
             UserService $service,
+            UserRepository $repository,
             $config = array())
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
+        $this->repository = $repository;
     }
 
-        public function actionIndex() 
+    public function actionIndex() 
     {
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -46,10 +53,10 @@ class UsersController extends BaseAdminController
    
     public function actionUpdate($id)
     {
-        $user = $this->findModel($id);
+        $user = $this->findModel($this->repository, $id);
         $form = new EditForm($user);
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
-            $this->service->edit($id, $form);
+            $this->service->edit($this->repository->findById($id), $form);
             return $this->redirect(['view', 'id' => $user->id]);
         }
         return $this->render('update', [
@@ -65,7 +72,7 @@ class UsersController extends BaseAdminController
     public function actionView($id)
     {
         return $this->render('view', [
-            'user' => $this->findModel($id),
+            'user' => $this->findModel($this->repository,$id),
         ]);
     }
     
@@ -91,16 +98,5 @@ class UsersController extends BaseAdminController
         return $this->redirect(['index']);
     }
 
-        /**
-     * @param integer $id
-     * @return Post the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id): User
-    {
-        if (($model = UserRepository::findById($id)) !== null) {
-            return $model;
-        }
-        throw new NotFoundHttpException('The requested page does not exist.');
-    }
+
 }

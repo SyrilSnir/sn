@@ -10,8 +10,16 @@ require __DIR__ . '/../config/bootstrap.php';
 
 $baseConfig = require __DIR__  . '/../config/web.php';
 $componentsConfig['components']['urlManager'] = require __DIR__  . '/../config/urlManager.php';
-$dbConfig['components']['db'] = require __DIR__  . '/../config/db.php';
-$config = array_merge_recursive($baseConfig,$componentsConfig,$dbConfig);
+
+if (YII_DEBUG) {
+    $dbConfig['components']['db'] = require __DIR__  . '/../config/db-dev.php';
+    $config = require __DIR__  . '/../config/config-dev.php';
+} else  {
+    $dbConfig['components']['db'] = require __DIR__  . '/../config/db.php';
+    $config = require __DIR__  . '/../config/config.php';
+}
+
+$config = array_merge_recursive($baseConfig,$componentsConfig,$dbConfig, $config);
 
 //dump($config);die;
 //dump(class_exists(app\controllers\SiteController::class));die;

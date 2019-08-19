@@ -3,6 +3,7 @@
 namespace app\models\Forms\Manage\User;
 
 use yii\base\Model;
+use app\models\ActiveRecord\User\User;
 
 /**
  * Description of CreateForm
@@ -37,7 +38,7 @@ class CreateForm extends Model
             [
                 ['username'],
                 'unique',
-                'targetClass'=> 'app\Models\ActiveRecord\User',
+                'targetClass'=> User::class,
                 'targetAttribute' => ['username','username' => 'email'],
                 'targetAttributeJunction' =>'or',
                 'message' => 'Пользователь с указанными данными уже зарегистрирован'
@@ -45,7 +46,7 @@ class CreateForm extends Model
             [                
                 ['email'],
                     'unique',
-                    'targetClass'=> 'app\Models\ActiveRecord\User',
+                    'targetClass'=> User::class,
                     'targetAttribute' => ['email','email' => 'username'],
                     'targetAttributeJunction' =>'or',
                     'message' => 'Пользователь с указанными данными уже зарегистрирован'

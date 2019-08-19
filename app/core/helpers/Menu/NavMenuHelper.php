@@ -1,6 +1,6 @@
 <?php
 
-namespace app\helpers;
+namespace app\core\helpers\Menu;
 
 use Yii;
 /**
@@ -10,7 +10,7 @@ use Yii;
  */
 class NavMenuHelper
 {
-    public static function getMenu()
+    public static function getMenu() :array
     {
         if (Yii::$app->user->isGuest) {
             $menu = [

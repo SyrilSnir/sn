@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $user app\models\ActiveRecord\User */
+/* @var $user app\models\ActiveRecord\User\User */
 /* @var $modificationsProvider yii\data\ActiveDataProvider */
 
 $this->title = $user->username;
@@ -30,8 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $user,
                 'attributes' => [
                     'id',
-                    'username:text:Имя',
-                    'email'
+                    'username:text:Логин',
+                    'type:text:Тип',
+                    'email',
+                    'fio:text:ФИО'
                 ],
             ]); ?>
         </div>

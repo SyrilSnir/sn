@@ -34,11 +34,18 @@ tests/_support/_generated
 composer.lock
 
 #Yii cache
-/runtime
-/web/assets
+
 
 #Db Production
 /config/db.php
 
-yii
+#yii
+/yii
 /web/index.php
+
+#node
+/node_modules
+package-lock.json
+
+#excluded
+!.gitkeep

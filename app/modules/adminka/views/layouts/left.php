@@ -1,3 +1,9 @@
+<?php 
+
+use app\core\helpers\Menu\AdminMenuHelper;
+use dmstr\widgets\Menu;
+
+?>
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -26,32 +32,8 @@
         </form>
         <!-- /.search form -->
 
-        <?= dmstr\widgets\Menu::widget(
-            [
-                'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
-                'items' => [
-                    [
-                        'label' => 'Управление',
-                        'icon' => 'share',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => 'Пользователи', 'icon' => 'user-circle', 'url' => ['/adminka/users'],],
-                            //['label' => 'Категории', 'icon' => 'dashboard', 'url' => ['/admin/category'],],
-                            //['label' => 'Метки', 'icon' => 'dashboard', 'url' => ['/admin/tags'],],
-                        ],
-                    ],
-                    [
-                        'label' => 'Новостной раздел',
-                        'icon' => 'share',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => 'Публикации', 'icon' => 'file-code-o', 'url' => ['/admin/news'],],
-                            ['label' => 'Категории', 'icon' => 'dashboard', 'url' => ['/admin/category'],],
-                            ['label' => 'Метки', 'icon' => 'dashboard', 'url' => ['/admin/tags'],],
-                        ],
-                    ],
-                ],
-            ]
+        <?= Menu::widget(
+                AdminMenuHelper::getMenu()
         ) ?>
 
     </section>

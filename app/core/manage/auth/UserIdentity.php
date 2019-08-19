@@ -3,8 +3,8 @@
 namespace app\core\manage\auth;
 
 use yii\web\IdentityInterface;
-use app\models\ActiveRecord\User;
-use app\core\repositories\UserRepository;
+use app\models\ActiveRecord\User\User;
+use app\core\repositories\User\UserRepository;
 use yii\base\Model;
 use Yii;
 

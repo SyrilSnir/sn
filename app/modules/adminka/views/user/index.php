@@ -2,7 +2,6 @@
 use yii\grid\ActionColumn;
 use yii\helpers\Html;
 use yii\grid\GridView;
-use app\models\ActiveRecord\News\Category;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\forms\Blog\CategorySearch */

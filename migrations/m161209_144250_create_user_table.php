@@ -22,16 +22,17 @@ class m161209_144250_create_user_table extends Migration
             'auth_key' => $this->string(32)->notNull(),
             'password_hash' => $this->string()->notNull(),
             'password_reset_token' => $this->string()->unique(),
-            'fio' => $this->string(),
-            'birthday' => $this->date(),
-            'external' => $this->smallInteger()->notNull()->defaultValue(0),
-            'created_by' => $this->integer()->notNull()->defaultValue(0),
-            'created_at' => $this->dateTime()->notNull(),
-            'updated_at' => $this->dateTime()->notNull(),
-            'active' => $this->boolean()->notNull()->defaultValue(true) 
+            'user_types_id' => $this->integer()->comment('Тип пользователя'),
+            'fio' => $this->string()->comment('ФИО'),
+            'birthday' => $this->date()->comment('Дата рождения'),
+            'external' => $this->smallInteger()->notNull()->defaultValue(0)->comment('Признак авторизации из внешнего источника'),
+            'created_by' => $this->integer()->notNull()->defaultValue(0)->comment('Кем создан'),
+            'created_at' => $this->dateTime()->notNull()->comment('Дата создания'),
+            'updated_at' => $this->dateTime()->notNull()->comment('Дата обновления'),
+            'active' => $this->boolean()->notNull()->defaultValue(true)
         ], $tableOptions);
-    }
 
+    }
     public function down()
     {
         $this->dropTable('{{%users}}');

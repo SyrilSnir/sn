@@ -2,7 +2,7 @@
 
 namespace app\models\Forms\Manage\User;
 
-use app\models\ActiveRecord\User;
+use app\models\ActiveRecord\User\User;
 use yii\base\Model;
 
 
@@ -15,7 +15,9 @@ class EditForm extends Model
 {
     public $username;
     public $email;
-    
+    public $fio;
+
+
     /**
      *
      * @var User
@@ -26,6 +28,7 @@ class EditForm extends Model
     {
         $this->username = $user->username;
         $this->email = $user->email; 
+        $this->fio = $user->fio;
         $this->user = $user;
         parent::__construct($config);
     }
@@ -33,24 +36,26 @@ class EditForm extends Model
     public function rules(): array
     {
         return [
-            [['username', 'email'], 'required'],                        [
-            ['username'],
-                'unique',
-                'targetClass'=> 'app\Models\ActiveRecord\User',
-                'targetAttribute' => ['username','username' => 'email'],
-                'targetAttributeJunction' =>'or',
-                'filter' => ['<>', 'id', $this->user->id],
-                'message' => 'Пользователь с указанными данными уже зарегистрирован'
-            ],  
+            [['username', 'email'], 'required'],                        
+            [
+                ['username'],
+                    'unique',
+                    'targetClass'=> User::class,
+                    'targetAttribute' => ['username','username' => 'email'],
+                    'targetAttributeJunction' =>'or',
+                    'filter' => ['<>', 'id', $this->user->id],
+                    'message' => 'Пользователь с указанными данными уже зарегистрирован'
+                ],  
             [                
                 ['email'],
                     'unique',
-                    'targetClass'=> 'app\Models\ActiveRecord\User',
+                    'targetClass'=> User::class,
                     'targetAttribute' => ['email','email' => 'username'],
                     'targetAttributeJunction' =>'or',
                     'filter' => ['<>', 'id', $this->user->id],
                     'message' => 'Пользователь с указанными данными уже зарегистрирован'
             ],
+            [['fio'] , 'safe']
         ];
     }
     
@@ -58,7 +63,8 @@ class EditForm extends Model
     {
         return [
             'username' => 'Логин',
-            'email' => 'Адрес электронной почты'
+            'email' => 'Адрес электронной почты',
+            'fio' => 'ФИО'
         ];
     }
 }

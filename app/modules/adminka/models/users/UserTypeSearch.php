@@ -2,45 +2,44 @@
 
 namespace app\modules\adminka\models\users;
 
-use yii\data\ActiveDataProvider;
 use yii\base\Model;
-use app\models\ActiveRecord\User\User;
+use yii\data\ActiveDataProvider;
+use app\models\ActiveRecord\User\UserType;
+
 /**
- * Description of UserSearch
+ * Description of UserTypeSearch
  *
  * @author kotov
  */
-class UserSearch extends Model
-{    
-    public $username;
-    public $email;
+class UserTypeSearch extends Model
+{
+    public $name;
+    public $slug;
     
     public function rules(): array
     {
         return [
-            [['username','email'], 'safe'],
+            [['name','slug'], 'safe'],
         ];
     }
     
     public function search(array $params): ActiveDataProvider
     {
-        $query = User::find();
+        $query = UserType::find();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
-                'defaultOrder' => ['username' => SORT_ASC]
+                'defaultOrder' => ['id' => SORT_ASC]
             ]
         ]);
-        $query->andFilterWhere([
-            'active' => User::STATUS_ACTIVE,
-        ]);
+
         $this->load($params);
         if (!$this->validate()) {
             $query->where('0=1');
             return $dataProvider;
         }
-        $query->andFilterWhere(['like','username', $this->username]);
-        $query->andFilterWhere(['like','email', $this->email]);
+        $query->andFilterWhere(['like','name', $this->name]);
+        $query->andFilterWhere(['like','slug', $this->slug]);
         return $dataProvider;
     }
 }
