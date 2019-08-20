@@ -7,9 +7,9 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
-$this->title = 'Редактировать тип учетной записи: ' . $user->id;
+$this->title = 'Редактировать тип учетной записи: ' . $userType->id;
 $this->params['breadcrumbs'][] = ['label' => 'UserType', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $userType->id, 'url' => ['view', 'id' => $user->id]];
+$this->params['breadcrumbs'][] = ['label' => $userType->id, 'url' => ['view', 'id' => $userType->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="user-update">

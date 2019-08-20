@@ -3,7 +3,7 @@
 namespace app\models\Forms\Manage\User;
 
 use app\models\ActiveRecord\User\User;
-use yii\base\Model;
+use yii\helpers\ArrayHelper;
 
 
 /**
@@ -11,13 +11,8 @@ use yii\base\Model;
  *
  * @author kotov
  */
-class EditForm extends Model
+class EditForm extends UserManageForm
 {
-    public $username;
-    public $email;
-    public $fio;
-
-
     /**
      *
      * @var User
@@ -29,6 +24,7 @@ class EditForm extends Model
         $this->username = $user->username;
         $this->email = $user->email; 
         $this->fio = $user->fio;
+        $this->user_type_id = $user->user_types_id;
         $this->user = $user;
         parent::__construct($config);
     }
@@ -36,7 +32,8 @@ class EditForm extends Model
     public function rules(): array
     {
         return [
-            [['username', 'email'], 'required'],                        
+            [['username', 'email'], 'required'],
+            ['user_type_id' ,'integer'],
             [
                 ['username'],
                     'unique',
@@ -64,7 +61,12 @@ class EditForm extends Model
         return [
             'username' => 'Логин',
             'email' => 'Адрес электронной почты',
-            'fio' => 'ФИО'
+            'fio' => 'ФИО',
+            'user_type_id' => 'Тип учетной записи'
         ];
+    }
+    public function typeList()
+    {
+        return ArrayHelper::merge(['' => 'Не задано'], parent::typeList());
     }
 }

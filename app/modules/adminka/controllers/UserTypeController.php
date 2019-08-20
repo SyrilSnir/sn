@@ -58,7 +58,7 @@ class UserTypeController extends BaseAdminController
         }
         return $this->render('update', [
             'model' => $form,
-            'user' => $userType,
+            'userType' => $userType,
         ]);
          
     }

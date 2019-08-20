@@ -28,19 +28,26 @@ class UserService implements ModelOperationsInterface
                 $form->username,                
                 $form->email, 
                 $form->password,
-                $form->fio);
+                $form->fio,
+                $form->user_type_id);
         if (!$user->save()) {
             throw new \RuntimeException('Ошибка сохранения.');        
         }
         return $user;
         
     }
-    
+    /**
+     * 
+     * @param User $user
+     * @param EditForm $form
+     * @throws \RuntimeException
+     */
     public function edit($user, $form) 
     {
         $user->username = $form->username;
         $user->email = $form->email;  
         $user->fio = $form->fio;
+        $user->user_types_id = $form->user_type_id;
         if (!$user->save()) {
             throw new \RuntimeException('Ошибка сохранения.');        
         }        

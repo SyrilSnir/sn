@@ -11,6 +11,7 @@ $this->title = $user->username;
 $this->params['breadcrumbs'][] = ['label' => 'Пользователи', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?php if (!in_array($user->username, Yii::$app->params['rootUsers'])): ?>
 <div class="user-view">
     <p>
         <?= Html::a('Изменить', ['update', 'id' => $user->id], ['class' => 'btn btn-primary']) ?>
@@ -22,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
+<?php endif; ?>
     <div class="box">
         <div class="box-header with-border">Данные пользователя</div>
         <div class="box-body">

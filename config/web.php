@@ -6,6 +6,7 @@ return [
     'version' => '0.0',
     'viewPath' => '@views',
     'language' => 'ru-Ru',
+    'params' => require_once __DIR__ . '/params.php',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -31,6 +32,16 @@ return [
             'identityClass' => 'app\core\manage\auth\UserIdentity',        
             'enableAutoLogin' => false,
             'loginUrl' => ['adminka/login'],
+        ],
+        'log' => [
+            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'targets' => [
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['error', 'warning','info'],
+                    'logVars' => ['_GET', '_POST'],
+                ],
+            ],            
         ],
     ]
     

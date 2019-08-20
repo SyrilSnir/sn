@@ -28,7 +28,7 @@ class UserTypeForm extends Model
     {
         return [
           'name'  => 'Тип учетной записи',
-          'slug' => 'Уникальный идентификатор'
+          'slug' => 'Уникальный идентификатор',
         ];
     }
 
@@ -37,5 +37,5 @@ class UserTypeForm extends Model
         return [
             [['name','slug'],'required']
         ];
-    }
+    }    
 }

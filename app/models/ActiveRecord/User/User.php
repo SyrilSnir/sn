@@ -33,12 +33,18 @@ class User extends ActiveRecord
     
     use TimestampTrait;
     
-    public static function create($userName,$email,$password,$fio):self
+    public static function create(
+            $userName,
+            $email,
+            $password,
+            $fio,
+            $userType):self
     {
         $user = new self();
         $user->username = $userName;
         $user->email = $email;
         $user->fio = $fio;
+        $user->user_types_id = $userType;
         $user->setPassword($password);
         $user->setAuthKey();
         return $user;
@@ -71,7 +77,5 @@ class User extends ActiveRecord
     public function getType()
     {
         return $this->userType->name;
-    }
-    
-    
+    }       
 }

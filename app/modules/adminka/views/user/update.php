@@ -19,9 +19,10 @@ $this->params['breadcrumbs'][] = 'Update';
     <?= $form->field($model, 'username')->textInput(['maxLength' => true]) ?>
     <?= $form->field($model, 'email')->textInput(['maxLength' => true]) ?>
     <?= $form->field($model, 'fio')->textInput(['maxLength' => true]) ?>
+    <?= $form->field($model, 'user_type_id')->dropDownList($model->typeList()) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

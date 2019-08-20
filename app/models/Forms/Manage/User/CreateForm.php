@@ -2,30 +2,29 @@
 
 namespace app\models\Forms\Manage\User;
 
-use yii\base\Model;
 use app\models\ActiveRecord\User\User;
+
 
 /**
  * Description of CreateForm
  *
  * @author kotov
  */
-class CreateForm extends Model
+class CreateForm extends UserManageForm
 {
-    public $username;
-    public $fio;
-    public $email;
     //public $birthday;
     public $password;
     public $password_repeat;
-    
+
+
     public function attributeLabels(): array
     {
         return [
             'username' => 'Имя пользователя (Логин)',
             'fio' => 'ФИО',
             'password' => 'Пароль',
-            'password_repeat' => 'Повторите пароль'
+            'password_repeat' => 'Повторите пароль',
+            'user_type_id' => 'Тип учетной записи'
         ];
     }
     
@@ -35,6 +34,7 @@ class CreateForm extends Model
         [
             [['username','email','password'],'required'],
             [['username','email','password','fio'],'trim'],
+            ['user_type_id' ,'integer'],
             [
                 ['username'],
                 'unique',
